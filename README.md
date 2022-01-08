@@ -12,7 +12,7 @@ Run it with cargo:
 
 `cargo run -- --input $path-of-the-image -f $factor -e $effect-name -r $resize`
 
-Help?
+Help:
 
 `cargo run -- --help`
 
@@ -42,6 +42,7 @@ Pixelliarmus + invert:
 ## Future Work
 
 - Research and implement other algorithms.
+- User controlled output format.
 - Resize image according to user input.
 - Refactor code while learning it.
 - Implement other effects.
