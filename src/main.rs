@@ -23,6 +23,7 @@ struct Config{
 
 fn main() {
     
+    //Parse arguments
     let cli = Config::parse();
     let fac = cli.factor;
     let name = cli.input.clone();
@@ -32,6 +33,7 @@ fn main() {
     let filename = path.file_stem().unwrap().to_str().unwrap();
     let extension = path.extension().unwrap().to_str().unwrap();
 
+    //Create operation struct
     let img = Operation{
         name: cli.input,
         factor: cli.factor,
@@ -39,8 +41,10 @@ fn main() {
         effect: cli.effect
     };
 
+    //Do the magic
     let pixelized_img = pixelliarmus(img);
 
+    //Save image
     let output_file_name = format!("{}-{}-{}.{}",filename , fac, eff, extension );
     let _result = pixelized_img.save(output_file_name);
     

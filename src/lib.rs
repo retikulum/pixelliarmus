@@ -7,7 +7,8 @@ pub struct Operation{
     pub effect: String,
 }
 
-
+//I couldn't find luma_to_rgba function so implement it
+//Not sure if it is the best way
 fn luma_to_rgba(greyscaled_image: ImageBuffer<Luma<u8>, Vec<u8>>) -> ImageBuffer<Rgba<u8>, Vec<u8>>{
     let mut rgba_image =  ImageBuffer::new(greyscaled_image.width(), greyscaled_image.height());
 
@@ -23,7 +24,7 @@ fn luma_to_rgba(greyscaled_image: ImageBuffer<Luma<u8>, Vec<u8>>) -> ImageBuffer
 
 pub fn pixelliarmus(img: Operation) ->  ImageBuffer<Rgba<u8>, Vec<u8>>{
 
-    
+    //Parse from struct
     let filename = img.name;
     let factor = img.factor;
     let resize = img.resize;
@@ -35,6 +36,7 @@ pub fn pixelliarmus(img: Operation) ->  ImageBuffer<Rgba<u8>, Vec<u8>>{
     let new_height = height / factor;
     let mut pixelized_img =  ImageBuffer::new(new_width, new_height);
 
+    //Resize with the given factor
     for x in 0..pixelized_img.width(){
         for y in 0..pixelized_img.height(){
             let pixel = img.get_pixel(x * factor, y * factor);
@@ -43,6 +45,7 @@ pub fn pixelliarmus(img: Operation) ->  ImageBuffer<Rgba<u8>, Vec<u8>>{
         }
     }
 
+    //Effects
     if effect.eq("greyscale"){
         let greyscaled_image = grayscale(&pixelized_img);
         pixelized_img = luma_to_rgba(greyscaled_image);
@@ -65,6 +68,7 @@ pub fn pixelliarmus(img: Operation) ->  ImageBuffer<Rgba<u8>, Vec<u8>>{
         return pixelized_img;
     }
 
+    //Resize it to original dimensions
     pixelized_img = imageops::resize(&pixelized_img, width, height, imageops::FilterType::Nearest);
 
 
