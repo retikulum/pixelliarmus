@@ -24,19 +24,19 @@ There is a little cat image in images folder. You can do pixelliarmus spell on i
 
 Original photo:
 
-![](https://github.com/retikulum/pixelliarmus/blob/main/images/test.jpg)
+![](/images/test.jpg)
 
 Only pixelliarmus:
 
-![](https://github.com/retikulum/pixelliarmus/blob/main/images/test-2.jpg)
+![](/images/test-2-.jpg)
 
 Pixelliarmus + greyscale:
 
-![](https://github.com/retikulum/pixelliarmus/blob/main/images/test-2-greyscale.jpg)
+![](/images/test-2-greyscale.jpg)
 
 Pixelliarmus + invert:
 
-![](https://github.com/retikulum/pixelliarmus/blob/main/images/test-2-invert.jpg)
+![](/images/test-2-invert.jpg)
 
 
 ## Future Work
