@@ -45,4 +45,5 @@ Pixelliarmus + invert:
 - User controlled output format.
 - Resize image according to user input.
 - Refactor code while learning it.
+- Publis it as crate.
 - Implement other effects.
