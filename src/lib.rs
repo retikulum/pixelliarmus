@@ -1,13 +1,19 @@
 use image::{GenericImageView, ImageBuffer, imageops::{self,  grayscale, invert}, Rgba, Pixel, Luma};
 
+
+//Operation struct
+// It is used for storing data processing image
+#[derive(Clone)]
 pub struct Operation{
     pub name: String,
     pub factor: u32,
     pub resize: String,
     pub effect: String,
+    pub output_file_name: String,
+    pub extension: String
 }
 
-//I couldn't find luma_to_rgba function so implement it
+//I counldn't find luma_to_rgba functio so implement it
 //Not sure if it is the best way
 fn luma_to_rgba(greyscaled_image: ImageBuffer<Luma<u8>, Vec<u8>>) -> ImageBuffer<Rgba<u8>, Vec<u8>>{
     let mut rgba_image =  ImageBuffer::new(greyscaled_image.width(), greyscaled_image.height());
@@ -32,8 +38,11 @@ pub fn pixelliarmus(img: Operation) ->  ImageBuffer<Rgba<u8>, Vec<u8>>{
     let img = image::open(filename).unwrap();
     let (width, height) = img.dimensions();
 
+    //Middle layers widt and height
     let new_width = width / factor;
     let new_height = height / factor;
+
+    //Create empty buffer with new dimensions
     let mut pixelized_img =  ImageBuffer::new(new_width, new_height);
 
     //Resize with the given factor
@@ -45,23 +54,18 @@ pub fn pixelliarmus(img: Operation) ->  ImageBuffer<Rgba<u8>, Vec<u8>>{
         }
     }
 
-    //Effects
+    //Check the effects
     if effect.eq("greyscale"){
         let greyscaled_image = grayscale(&pixelized_img);
         pixelized_img = luma_to_rgba(greyscaled_image);
- 
-
     }
     else if effect.eq("invert"){
         invert(&mut pixelized_img);
-
     }
-    else if effect.eq(""){
-        
+    else if effect.eq(""){ 
     }
     else{
         panic!("Effect can't find or doesn't implemented yet");
-
     }
 
     if resize.eq("false"){
@@ -77,3 +81,22 @@ pub fn pixelliarmus(img: Operation) ->  ImageBuffer<Rgba<u8>, Vec<u8>>{
 
 }
 
+
+//parse output parameter
+pub fn parse_output(cli: Operation) -> String{
+    let output_file_name;
+    if cli.output_file_name.eq(""){
+        if cli.effect.eq(""){
+            output_file_name = format!("{}-{}.{}",cli.name , cli.factor, cli.extension );
+        }
+        else{
+            output_file_name =  format!("{}-{}-{}.{}",cli.name , cli.factor, cli.effect, cli.extension );
+        }
+    }
+    else{
+        output_file_name = cli.output_file_name.clone();
+    }
+
+    output_file_name
+
+}
