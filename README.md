@@ -41,9 +41,9 @@ Pixelliarmus + invert:
 
 ## Future Work
 
-- Research and implement other algorithms.
-- User controlled output format.
-- Resize image according to user input.
-- Refactor code while learning it.
-- Publish it as crate.
-- Implement other effects.
+- Research and implement other algorithms
+- User controlled output format
+- Resize image according to user input
+- Refactor code while learning it
+- Publish it as crate
+- Implement other effects
