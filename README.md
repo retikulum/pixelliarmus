@@ -10,7 +10,7 @@ You can clone the repository
 
 Run it with cargo:
 
-`cargo run -- --input $path-of-the-image -f $factor -e $effect-name -r $resize`
+`cargo run -- --input $path-of-the-image -f $factor -e $effect-name -r $widthxheight`
 
 Help:
 
@@ -42,8 +42,8 @@ Pixelliarmus + invert:
 ## Future Work
 
 - Research and implement other algorithms
-- <del>User controlled output format<del>
-- Resize image according to user input
+- <del>User controlled output file<del>
+- <del>Resize image according to user input<del>
 - Refactor code while learning it
 - Publish it as crate
 - Implement other effects
