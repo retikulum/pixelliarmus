@@ -60,4 +60,5 @@ Pixelliarmus + Greyscale + Gaussian:
 - <del>Resize image according to user input<del>
 - Refactor code while learning it
 - Publish it as crate
+- Create documentation
 - <del>Implement other effects<del>
