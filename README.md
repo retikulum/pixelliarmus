@@ -26,17 +26,31 @@ Original photo:
 
 ![](/images/test.jpg)
 
-Only pixelliarmus:
+Only Pixelliarmus:
 
 ![](/images/test-2-.jpg)
 
-Pixelliarmus + greyscale:
+Pixelliarmus + Greyscale:
 
 ![](/images/test-2-greyscale.jpg)
 
-Pixelliarmus + invert:
+Pixelliarmus + Invert:
 
 ![](/images/test-2-invert.jpg)
+
+**Now it supports different filter types:**
+
+Pixelliarmus + Gaussian:
+
+![](/images/test-2-gaussian.jpg)
+
+Pixelliarmus + Triangle:
+
+![](/images/test-2-triangle.jpg)
+
+Pixelliarmus + Greyscale + Gaussian:
+
+![](/images/test-2-greyscale-gaussian.jpg)
 
 
 ## Future Work
@@ -46,4 +60,4 @@ Pixelliarmus + invert:
 - <del>Resize image according to user input<del>
 - Refactor code while learning it
 - Publish it as crate
-- Implement other effects
+- <del>Implement other effects<del>

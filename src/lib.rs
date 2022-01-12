@@ -13,6 +13,7 @@ pub struct Operation {
     pub effect: String,
     pub output_file_name: String,
     pub extension: String,
+    pub filter_type: String,
 }
 
 //I counldn't find luma_to_rgba functio so implement it
@@ -37,8 +38,8 @@ pub fn pixelliarmus(img: Operation) -> ImageBuffer<Rgba<u8>, Vec<u8>> {
     let factor = img.factor;
     let resize = img.resize;
     let effect = img.effect;
-    let img = image::open(filename).unwrap();
-    let (width, height) = img.dimensions();
+    let input_image = image::open(filename).unwrap();
+    let (width, height) = input_image.dimensions();
 
     //Middle layers widt and height
     let new_width = width / factor;
@@ -50,7 +51,7 @@ pub fn pixelliarmus(img: Operation) -> ImageBuffer<Rgba<u8>, Vec<u8>> {
     //Resize with the given factor
     for x in 0..pixelized_img.width() {
         for y in 0..pixelized_img.height() {
-            let pixel = img.get_pixel(x * factor, y * factor);
+            let pixel = input_image.get_pixel(x * factor, y * factor);
             pixelized_img.put_pixel(x, y, pixel);
         }
     }
@@ -66,19 +67,15 @@ pub fn pixelliarmus(img: Operation) -> ImageBuffer<Rgba<u8>, Vec<u8>> {
         panic!("Effect can't find or doesn't implemented yet");
     }
 
+    let filter = parse_filter_type(img.filter_type.to_string());
+
     if resize.eq("false") {
         return pixelized_img;
     } else if resize.eq("true") {
-        pixelized_img =
-            imageops::resize(&pixelized_img, width, height, imageops::FilterType::Nearest);
+        pixelized_img = imageops::resize(&pixelized_img, width, height, filter);
     } else {
         let (resized_width, resized_height) = parse_resize(resize);
-        pixelized_img = imageops::resize(
-            &pixelized_img,
-            resized_width,
-            resized_height,
-            imageops::FilterType::Nearest,
-        );
+        pixelized_img = imageops::resize(&pixelized_img, resized_width, resized_height, filter);
     }
 
     pixelized_img
@@ -102,7 +99,7 @@ pub fn parse_resize(dimensions: String) -> (u32, u32) {
     }
 
     let height_res = splitted[1].parse::<u32>();
-    
+
     //Handling errors
     match height_res {
         Ok(p) => height = p,
@@ -132,4 +129,18 @@ pub fn parse_output(cli: Operation) -> String {
     }
 
     output_file_name
+}
+
+//Parse filter type parameter
+fn parse_filter_type(filter_type: String) -> imageops::FilterType {
+    let lower_filter_type = filter_type.to_lowercase();
+
+    match lower_filter_type.as_str(){
+        "nearest" => imageops::FilterType::Nearest,
+        "triangle" => imageops::FilterType::Triangle,
+        "catmullrom" => imageops::FilterType::CatmullRom,
+        "gaussian" => imageops::FilterType::Gaussian,
+        "lanczos3" => imageops::FilterType::Lanczos3,
+        _ => panic!("This effect couldn't found. These are the available filter types: Nearest, Triangle, CatmullRom, Gaussian, Lanczos3")
+    }
 }

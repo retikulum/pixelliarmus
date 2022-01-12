@@ -20,6 +20,9 @@ struct Config {
 
     #[clap(short, long, default_value = "")]
     output: String,
+
+    #[clap(long, default_value = "nearest")]
+    filter_type: String,
 }
 
 fn main() {
@@ -37,6 +40,7 @@ fn main() {
         effect: cli.effect,
         output_file_name: cli.output,
         extension: extension.to_string(),
+        filter_type: cli.filter_type,
     };
 
     //Do the magic
