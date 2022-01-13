@@ -28,13 +28,21 @@ Original photo:
 
 Only Pixelliarmus:
 
+`cargo run -- --input .\images\test.jpg -f 2`
+
+
 ![](/images/test-2-.jpg)
 
 Pixelliarmus + Greyscale:
 
+`cargo run -- --input .\images\test.jpg -f 2 --effect greyscale`
+
+
 ![](/images/test-2-greyscale.jpg)
 
 Pixelliarmus + Invert:
+
+`cargo run -- --input .\images\test.jpg -f 2 --effect invert`
 
 ![](/images/test-2-invert.jpg)
 
@@ -42,13 +50,19 @@ Pixelliarmus + Invert:
 
 Pixelliarmus + Gaussian:
 
+`cargo run -- --input .\images\test.jpg -f 2 -o .\test.jpg  --filter-type gaussian `
+
 ![](/images/test-2-gaussian.jpg)
 
 Pixelliarmus + Triangle:
 
+`cargo run -- --input .\images\test.jpg -f 2 -o .\test.jpg  --filter-type triangle `
+
 ![](/images/test-2-triangle.jpg)
 
 Pixelliarmus + Greyscale + Gaussian:
+
+`cargo run -- --input .\images\test.jpg -f 2 -o .\test.jpg  -effect greyscale --filter-type gaussian `
 
 ![](/images/test-2-greyscale-gaussian.jpg)
 
