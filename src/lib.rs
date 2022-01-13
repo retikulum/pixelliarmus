@@ -32,12 +32,12 @@ fn luma_to_rgba(
     rgba_image
 }
 
-pub fn pixelliarmus(img: Operation) -> ImageBuffer<Rgba<u8>, Vec<u8>> {
+pub fn pixelliarmus(img: Operation) -> (ImageBuffer<Rgba<u8>, Vec<u8>>, String) {
     //Parse from struct
-    let filename = img.name;
+    let filename = img.name.clone();
     let factor = img.factor;
-    let resize = img.resize;
-    let effect = img.effect;
+    let resize = img.resize.clone();
+    let effect = img.effect.clone();
     let input_image = image::open(filename).unwrap();
     let (width, height) = input_image.dimensions();
 
@@ -56,6 +56,8 @@ pub fn pixelliarmus(img: Operation) -> ImageBuffer<Rgba<u8>, Vec<u8>> {
         }
     }
 
+    let output_file_name = parse_output(img.clone());
+
     //Check the effects
     if effect.eq("greyscale") {
         let greyscaled_image = grayscale(&pixelized_img);
@@ -70,7 +72,7 @@ pub fn pixelliarmus(img: Operation) -> ImageBuffer<Rgba<u8>, Vec<u8>> {
     let filter = parse_filter_type(img.filter_type.to_string());
 
     if resize.eq("false") {
-        return pixelized_img;
+        return (pixelized_img,output_file_name);
     } else if resize.eq("true") {
         pixelized_img = imageops::resize(&pixelized_img, width, height, filter);
     } else {
@@ -78,12 +80,12 @@ pub fn pixelliarmus(img: Operation) -> ImageBuffer<Rgba<u8>, Vec<u8>> {
         pixelized_img = imageops::resize(&pixelized_img, resized_width, resized_height, filter);
     }
 
-    pixelized_img
+    (pixelized_img,output_file_name)
 }
 
 //Parse resize argument
 //Argument should be in format of "widthxheight"
-pub fn parse_resize(dimensions: String) -> (u32, u32) {
+fn parse_resize(dimensions: String) -> (u32, u32) {
     let width;
     let height;
     let splitted: Vec<&str> = dimensions.split("x").collect();
@@ -113,7 +115,7 @@ pub fn parse_resize(dimensions: String) -> (u32, u32) {
 }
 
 //parse output parameter
-pub fn parse_output(cli: Operation) -> String {
+fn parse_output(cli: Operation) -> String {
     let output_file_name;
     if cli.output_file_name.eq("") {
         if cli.effect.eq("") {

@@ -1,5 +1,5 @@
 use clap::Parser;
-use pixelliarmus::{parse_output, pixelliarmus, Operation};
+use pixelliarmus::{pixelliarmus, Operation};
 use std::path::Path;
 
 //Parse CLI thanks to the clap
@@ -43,11 +43,12 @@ fn main() {
         filter_type: cli.filter_type,
     };
 
-    //Do the magic
-    let pixelized_img = pixelliarmus(img.clone());
+    //TODO
+    //pixelliarmus function might return (ImageBuffer<Rgba<u8>>, Vec<u8>>, String(output_file_name))
+    //With this way, parse_output doesn't have to be public
 
-    //parse output parameter
-    let output_file_name = parse_output(img);
+    //Do the magic
+    let (pixelized_img, output_file_name) = pixelliarmus(img.clone());
 
     //Save the result
     let _result = pixelized_img.save(output_file_name);
