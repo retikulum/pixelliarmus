@@ -43,10 +43,6 @@ fn main() {
         filter_type: cli.filter_type,
     };
 
-    //TODO
-    //pixelliarmus function might return (ImageBuffer<Rgba<u8>>, Vec<u8>>, String(output_file_name))
-    //With this way, parse_output doesn't have to be public
-
     //Do the magic
     let (pixelized_img, output_file_name) = pixelliarmus(img.clone());
 
