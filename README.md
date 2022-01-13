@@ -1,6 +1,6 @@
 # Pixelliarmus
 
-This is a toy rust project that does Pixelliarmus spell on your pictures. In simpler terms, images are resized with the given factor and resized again to its original dimensions.
+This is a toy rust project that does Pixelliarmus spell on your pictures with effects. In simpler terms, images are resized with the given factor and resized again to its original dimensions.
 
 ## Install and Usage
 
