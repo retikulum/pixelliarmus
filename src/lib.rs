@@ -72,7 +72,7 @@ pub fn pixelliarmus(img: Operation) -> (ImageBuffer<Rgba<u8>, Vec<u8>>, String) 
     let filter = parse_filter_type(img.filter_type.to_string());
 
     if resize.eq("false") {
-        return (pixelized_img,output_file_name);
+        return (pixelized_img, output_file_name);
     } else if resize.eq("true") {
         pixelized_img = imageops::resize(&pixelized_img, width, height, filter);
     } else {
@@ -80,7 +80,7 @@ pub fn pixelliarmus(img: Operation) -> (ImageBuffer<Rgba<u8>, Vec<u8>>, String) 
         pixelized_img = imageops::resize(&pixelized_img, resized_width, resized_height, filter);
     }
 
-    (pixelized_img,output_file_name)
+    (pixelized_img, output_file_name)
 }
 
 //Parse resize argument
